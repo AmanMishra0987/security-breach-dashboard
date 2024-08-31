@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchBreachesRequest } from '../redux/slices/breachSlice';
 import { Table, Spin } from 'antd';
+const history = useHistory();
 
 const TablePage = () => {
   const dispatch = useDispatch();
@@ -30,8 +31,18 @@ const TablePage = () => {
     { title: 'Date', dataIndex: 'date', key: 'date' },
     { title: 'Time', dataIndex: 'time', key: 'time' },
   ];
+  const redirectToPieCharts = () => {
+    history.push('/charts');
+  };
 
-  return <Table dataSource={transformedData} columns={columns} rowKey="id" />;
+  return (
+    <div>
+      <Button type="primary" onClick={redirectToPieCharts} style={{ marginBottom: '16px' }}>
+        View Pie Charts
+      </Button>
+      <Table dataSource={transformedData} columns={columns} rowKey="id" />
+    </div>
+  );
 };
 
 export default TablePage;
