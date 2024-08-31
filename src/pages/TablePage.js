@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchBreachesRequest } from '../redux/slices/breachSlice';
-import { Table, Spin } from 'antd';
-const history = useHistory();
+import { Table, Spin,Button } from 'antd';
+import { useNavigate } from 'react-router-dom';
+
 
 const TablePage = () => {
   const dispatch = useDispatch();
   const { data, loading, error } = useSelector(state => state.breaches);
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(fetchBreachesRequest());
@@ -32,7 +34,7 @@ const TablePage = () => {
     { title: 'Time', dataIndex: 'time', key: 'time' },
   ];
   const redirectToPieCharts = () => {
-    history.push('/charts');
+    navigate('/charts');
   };
 
   return (
